@@ -10,3 +10,4 @@ export const addPost = (newPost) => API.post("/post", newPost)
 
 //update a post
 export const updatePost = (id, updatedPost) => API.patch(`/posts/${id}`, updatedPost);
+

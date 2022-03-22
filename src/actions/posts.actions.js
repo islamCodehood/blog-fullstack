@@ -2,6 +2,7 @@ import * as api from "../api";
 
 // Get posts
 export const getPosts = () => async (dispatch) => {
+	console.log("hello")
 	try {
 		const { data } = await api.getPosts();
 		dispatch({ type: "FETCH_ALL", payload: data });
@@ -9,10 +10,12 @@ export const getPosts = () => async (dispatch) => {
 		console.log(err);
 	}
 };
+
 //add post
 export const addPost = (newPost) => async (dispatch) => {
 	try {
-		const { data } = await api.addPost(newPost);
+		await api.addPost(newPost);
+		const { data } = await api.getPosts();
 		dispatch({ type: "ADD_POST", payload: data });
 	} catch (err) {
 		console.log(err);
@@ -21,10 +24,11 @@ export const addPost = (newPost) => async (dispatch) => {
 
 // Update post
 export const updatePost = (id, updatedPost) => async (dispatch) => {
-    try {
-        const { data } = await api.updatePost(id, updatedPost);
-        dispatch({ type: "UPDATE_POST", payload: data });
-    }catch(err) {
-        console.log(err)
-    }
-}
+	try {
+		await api.updatePost(id, updatedPost);
+		const { data } = await api.getPosts();
+		dispatch({ type: "UPDATE_POST", payload: data });
+	} catch (err) {
+		console.log(err);
+	}
+};
