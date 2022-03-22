@@ -6,7 +6,7 @@ const API = axios.create({baseURL: "https://api.tawwr.com"})
 export const getPosts = () => API.get("/posts")
 
 //add post
-export const addPost = (newPost) => API.post("/post", newPost)
+export const addPost = (newPost) => API.post("/posts", newPost)
 
 //update a post
 export const updatePost = (id, updatedPost) => API.patch(`/posts/${id}`, updatedPost);

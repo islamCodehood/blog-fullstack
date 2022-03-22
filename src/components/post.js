@@ -4,13 +4,13 @@ import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
-//import { PostsContext } from "../Context"
-//import hooks
-//import action creators
-//import { deletePost } from "../actions"
-
-
+import { TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useState, } from "react";
+import { Link } from "react-router-dom"
+import EditModal from "./editModal"
+ 
 const Post = ({ post }) => { //{title: "", id:""}
 	//const { posts, setPosts } = useContext(PostsContext)
 
@@ -21,16 +21,21 @@ const Post = ({ post }) => { //{title: "", id:""}
 		dispatch(deletePost(post.id))
 		//setPosts(filteredPosts);
 	}; */
+
+	/* const editPost = () => {
+		const 
+	} */
 	return (
+		<>
 		<Card sx={{ maxWidth: 345, bgcolor: "#eee" }}>
 			<CardHeader
 				title={post.title}
-				subheader={post.author}
+				subheader={post.authorId}
 			/>
 
 			<CardContent>
 				<Typography variant="body2" color="text.secondary">
-					{post.text}
+					{post.body}
 				</Typography>
 			</CardContent>
 			<CardActions disableSpacing>
@@ -42,8 +47,14 @@ const Post = ({ post }) => { //{title: "", id:""}
 				{/* <Button color="warning" variant="contained" onClick={deletePost}>
 					Delete
 				</Button> */}
+				{/* <Button color="warning" variant="contained" onClick={editPost}>
+					Edit
+				</Button> */}
+				<EditModal title={post.title} body={post.body} authorId={post.authorId} id={post.id} />
 			</CardActions>
 		</Card>
+		
+		</>
 	);
 };
 

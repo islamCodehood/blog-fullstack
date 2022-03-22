@@ -6,30 +6,28 @@ import { useState, } from "react";
 //import hooks
 import { useDispatch } from "react-redux"
 //import action creators
-import { addPost } from "../actions/posts.actions"
+import { updatePost } from "../actions/posts.actions"
 
-const FormModal = () => {
-	const [open, setOpen] = useState(false);
+const EditModal = ({body, authorId, title, id}) => {
+    const [open, setOpen] = useState(false);
 
-    //const { posts, setPosts } = useContext(PostsContext);
     
 	const dispatch = useDispatch();
 
 	const formik = useFormik({
 		initialValues: {
-			title: "",
-			authorId: "",
-			body: "",
+			title,
+			authorId,
+			body,
 		},
 		onSubmit: (values) => {
 			//const id = Date.now();
 			//const post = { ...values };
 
 			//dispatch ADD_POST action
-			dispatch(addPost(values))
+			dispatch(updatePost(id, values))
 
 			setOpen(false);
-			//setPosts([...posts, post]);
             formik.resetForm()
 		},
 		validationSchema: Yup.object({
@@ -46,11 +44,10 @@ const FormModal = () => {
 		setOpen(false);
         formik.resetForm()
 	};
-
-	return (
-		<div>
+    return ( 
+        <div>
 			<Button variant="outlined" onClick={handleClickOpen}>
-				Open form dialog
+				Edit
 			</Button>
 
 			<Dialog open={open} onClose={handleClose}>
@@ -111,7 +108,7 @@ const FormModal = () => {
 				</DialogActions>
 			</Dialog>
 		</div>
-	);
-};
-
-export default FormModal;
+     );
+}
+ 
+export default EditModal;
