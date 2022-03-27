@@ -9,5 +9,15 @@ export const getPosts = () => API.get("/posts")
 export const addPost = (newPost) => API.post("/posts", newPost)
 
 //update a post
-export const updatePost = (id, updatedPost) => API.patch(`/posts/${id}`, updatedPost);
+export const updatePost = (id, updatedPost) => API.put(`/posts/${id}`, updatedPost);
+
+//delete a post
+export const deletePost = (id) => API.delete(`/posts/${id}`);
+
+//vote
+export const votePost = (id, vote) => API.post(`/posts/${id}/vote`, vote)
+
+
+//comment
+export const addComment = (id, comment) => API.post(`/posts/${id}/comment`, comment)
 

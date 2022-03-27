@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Typography } from "@mui/material"
+import { useSelector } from "react-redux"
 const PostDetails = () => {
 	const { id } = useParams();
 	const [post, setPost] = useState({});
 
+	const posts = useSelector((state) => state.posts)
+
 	useEffect(() => {
-		const posts = JSON.parse(localStorage.getItem("posts"));
 		const post = posts.filter((p) => +p.id === +id)[0];
 		setPost(post);
 		console.log({ post, id });
@@ -17,6 +19,9 @@ const PostDetails = () => {
 		<>
 			<Typography variant="h4">
 				{post.title}
+			</Typography>
+			<Typography variant="body">
+				{post.body}
 			</Typography>
 		</>
 	);

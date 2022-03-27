@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux"
 //import action creators
 import { updatePost } from "../actions/posts.actions"
 
-const EditModal = ({body, authorId, title, id}) => {
+const EditModal = ({body, userId, title, id}) => {
     const [open, setOpen] = useState(false);
 
     
@@ -17,7 +17,7 @@ const EditModal = ({body, authorId, title, id}) => {
 	const formik = useFormik({
 		initialValues: {
 			title,
-			authorId,
+			userId,
 			body,
 		},
 		onSubmit: (values) => {
@@ -32,7 +32,7 @@ const EditModal = ({body, authorId, title, id}) => {
 		},
 		validationSchema: Yup.object({
 			title: Yup.string().required("Title is required").max(15, "limit passed"),
-			authorId: Yup.string().required("author is required").max(10, "limit passed"),
+			userId: Yup.string().required("author is required").max(10, "limit passed"),
 			body: Yup.string().required("your message is required").max(240, "limit passed"),
 		}),
 	});
@@ -46,30 +46,28 @@ const EditModal = ({body, authorId, title, id}) => {
 	};
     return ( 
         <div>
-			<Button variant="outlined" onClick={handleClickOpen}>
+			<Button variant="contained" onClick={handleClickOpen}>
 				Edit
 			</Button>
 
 			<Dialog open={open} onClose={handleClose}>
 				<DialogTitle>Subscribe</DialogTitle>
 				<DialogContent>
-					<DialogContentText>
-						To subscribe to this website, please enter your email address here. We will send updates occasionally.
-					</DialogContentText>
 					<TextField
-						error={Boolean(formik.errors.authorId) && Boolean(formik.touched.authorId)}
-						helperText={formik.errors.authorId}
+						error={Boolean(formik.errors.userId) && Boolean(formik.touched.userId)}
+						helperText={formik.errors.userId}
 						autoFocus
-						name="authorId"
-						value={formik.values.authorId}
+						name="userId"
+						value={formik.values.userId}
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
 						margin="dense"
-						id="authorId"
+						id="userId"
 						label="Author"
 						type="text"
 						fullWidth
 						variant="standard"
+                        disabled
 					/>
 					<TextField
 						error={Boolean(formik.errors.title) && Boolean(formik.touched.title)}

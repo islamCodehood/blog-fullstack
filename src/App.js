@@ -16,11 +16,13 @@ function App() {
 	return (
 		<div className="App">
 			<NavBar />
-
+			<div style={{padding: "12px"}}>
 			<Routes>
-				<Route path="/" element={<Home />} />
+				<Route path="/" element={<Home  />} />
 				<Route path="/post/:id" element={<PostDetails  />} />
 			</Routes>
+
+			</div>
 		</div>
 	);
 }

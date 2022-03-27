@@ -21,9 +21,9 @@ const Posts = () => {
 			{(!posts || posts.length === 0) ? (
 				<h1>Posts are loading</h1>
 			) : (
-				<Grid container spacing={3} style={{ marginTop: "30px" }}>
+				<Grid container spacing={4} style={{ marginTop: "30px" }}>
 					{posts.map((post) => (
-						<Grid key={post.id} item xs={12} md={4} xl={3}>
+						<Grid key={post.id} item xs={12} >
 							{" "}
 							<Post post={post} />{" "}
 						</Grid>
